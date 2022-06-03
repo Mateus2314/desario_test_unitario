@@ -1,7 +1,9 @@
+import { hash } from "bcryptjs";
 import { User } from "../../entities/User";
 
 import { ICreateUserDTO } from "../../useCases/createUser/ICreateUserDTO";
 import { IUsersRepository } from "../IUsersRepository";
+
 
 export class InMemoryUsersRepository implements IUsersRepository {
   private users: User[] = [];
@@ -16,7 +18,10 @@ export class InMemoryUsersRepository implements IUsersRepository {
 
   async create(data: ICreateUserDTO): Promise<User> {
     const user = new User();
-    Object.assign(user, data);
+    Object.assign(user, {
+      ...data,
+      password: await hash(data.password, 8)
+    });
     this.users.push(user);
     return user;
   }

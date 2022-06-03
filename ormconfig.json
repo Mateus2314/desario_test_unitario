@@ -1,10 +1,10 @@
 {
-  "username": "postgres",
-  "password": "docker",
+  "username": "root",
+  "password": "root",
 
   "name": "default",
   "type": "postgres",
-  "host": "localhost",
+  "host": "fin-postgres",
   "port": 5432,
   "database": "fin_api",
   "entities": [
